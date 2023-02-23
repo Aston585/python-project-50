@@ -1,18 +1,18 @@
-import json
+d1 = {
+  "host": "hexlet.io",
+  "timeout": 50,
+  "proxy": "123.234.53.22",
+  "follow": False
+}
+
+d2 = {
+  "timeout": 20,
+  "verbose": True,
+  "host": "hexlet.io"
+}
 
 
-def generate_diff(file_path1, file_path2):
-    with open(file_path1) as f1:
-        source1 = json.load(f1)
-    with open(file_path2) as f2:
-        source2 = json.load(f2)
-    output = map(prepare_output_data,
-            (i for i in get_comparison_results(source1, source2)))
-    result = '\n'.join(output)
-    return '{' + '\n' + result + '\n' + '}'
-
-
-def get_comparison_results(data1, data2):
+def get_status(data1, data2):
     keys = data1.keys() | data2.keys()
     result = []
     for key in sorted(keys):
@@ -29,6 +29,15 @@ def get_comparison_results(data1, data2):
     return result
 
 
-def prepare_output_data(data):
+def get_output_data(data):
     status, key, value = data
-    return f"{status} {key}: {value if value not in (False, True) else str(value).lower()}"
+    return f"{status} {key}: {value}"
+
+
+def get_diff(source1, source2):
+    output = map(get_output_data, (i for i in get_status(source1, source2)))
+    result = '\n'.join(output)
+    return '{' + '\n' + result + '\n' + '}'
+
+
+print(get_diff(d1, d2))
