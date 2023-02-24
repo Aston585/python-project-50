@@ -16,7 +16,7 @@ def get_parser():
 
 def main():
     args = get_parser()
-    gendiff.generate_diff(args.first_file, args.second_file)
+    print(gendiff.generate_diff(args.first_file, args.second_file))
 
 
 if __name__ == '__main__':

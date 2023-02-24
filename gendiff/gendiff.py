@@ -12,6 +12,7 @@ def generate_diff(file_path1, file_path2):
     return '{' + '\n' + result + '\n' + '}'
 
 
+
 def get_comparison_results(data1, data2):
     keys = data1.keys() | data2.keys()
     result = []
