@@ -7,10 +7,9 @@ def generate_diff(file_path1, file_path2):
     with open(file_path2) as f2:
         source2 = json.load(f2)
     output = map(prepare_output_data,
-            (i for i in get_comparison_results(source1, source2)))
+                 (i for i in get_comparison_results(source1, source2)))
     result = '\n'.join(output)
-    return '{' + '\n' + result + '\n' + '}'
-
+    return '{' + '\n' + result + '\n' + '}' + '\n'
 
 
 def get_comparison_results(data1, data2):
@@ -20,7 +19,7 @@ def get_comparison_results(data1, data2):
         if key not in data2:
             result.append(('-', key, data1[key]))
         elif key in data1 and data2:
-            if  data1[key] == data2[key]:
+            if data1[key] == data2[key]:
                 result.append((' ', key,  data1[key]))
             elif data1[key] != data2[key]:
                 result.append(('-', key,  data1[key]))
@@ -32,4 +31,4 @@ def get_comparison_results(data1, data2):
 
 def prepare_output_data(data):
     status, key, value = data
-    return f"{status} {key}: {value if value not in (False, True) else str(value).lower()}"
+    return f"  {status} {key}: {value if value not in (False, True) else str(value).lower()}"
