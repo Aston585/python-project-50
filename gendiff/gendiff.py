@@ -31,4 +31,4 @@ def get_comparison_results(data1, data2):
 
 def prepare_output_data(data):
     status, key, value = data
-    return f"  {status} {key}: {value if value not in (False, True) else str(value).lower()}"
+    return f"  {status} {key}: {value if value not in (False, True) else str(value).lower()}"  # noqa: E501
