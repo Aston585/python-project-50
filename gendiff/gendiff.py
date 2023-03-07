@@ -1,11 +1,23 @@
 import json
+import yaml
+
+
+def chek_and_open_file(file_path):
+    if file_path.endswith('.yaml') or file_path.endswith('.yml'):
+        with open(file_path) as f:
+            file_yaml = yaml.safe_load(f)
+            return file_yaml
+    elif file_path.endswith('.json'):
+        with open(file_path) as f:
+            file_json = json.load(f)
+            return file_json
+    else:
+        raise Exception("Invalid file format")
 
 
 def generate_diff(file_path1, file_path2):
-    with open(file_path1) as f1:
-        source1 = json.load(f1)
-    with open(file_path2) as f2:
-        source2 = json.load(f2)
+    source1 = chek_and_open_file(file_path1)
+    source2 = chek_and_open_file(file_path2)
     output = map(prepare_output_data,
                  (i for i in get_comparison_results(source1, source2)))
     result = '\n'.join(output)
