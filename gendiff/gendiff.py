@@ -28,37 +28,40 @@ def get_comparison_results(data1, data2):
     result = []
     for key in sorted(keys):
         if key not in data2:
-            result.append(('-', key, data1[key]))
+            result.append(('-', key, get_children(data1[key])))
         elif key in data1 and data2:
             if not (isinstance(data1[key], dict)
                     and isinstance(data2[key], dict)):
                 if data1[key] == data2[key]:
-                    result.append((' ', key,  data1[key]))
+                    result.append((' ', key,  get_children(data1[key])))
                 elif data1[key] != data2[key]:
-                    result.append(('-', key,  data1[key]))
-                    result.append(('+', key, data2[key]))
+                    result.append(('-', key,  get_children(data1[key])))
+                    result.append(('+', key, get_children(data2[key])))
             else:
                 result.append((' ', key,
                                get_comparison_results(data1[key], data2[key])))
         else:
-            result.append(('+', key, data2[key]))
+            result.append(('+', key, get_children(data2[key])))
     return result
 
 
-def stylish(data, replacer=' ', spaces_count=4):
+def get_children(data):
+    if not isinstance(data, dict):
+        return data
+    result = []
+    for key, value in data.items():
+        result.append((' ', key, get_children(value)))
+    return result
 
-    def inner(data, indent=0):
-        if not isinstance(data, list):
-            return data
-        level = replacer * indent
-        indent += spaces_count
-        a = list(map(lambda data: f"{level}{replacer * spaces_count}"
-                                  f"{data[0]} {data[1]}: "
-                                  f"{normalize_value(inner(data[2], indent))}", data))  # noqa: E501
-        b = list(chain('{', a, [level + '}']))
-        return '\n'.join(b)
 
-    return inner(data)
+def stylish(data, replacer=' ', level=0, spaces_count=4):
+    if not isinstance(data, list):
+        return data
+    level_indent = replacer * level * spaces_count
+    level += 1
+    a = list(map(lambda data: f"{level_indent}  {data[0] if data[0] else replacer} {data[1]}: {normalize_value(stylish(data[2], level=level))}", data))  # noqa: E501
+    b = list(chain('{', a, [level_indent + '}']))
+    return '\n'.join(b)
 
 
 def normalize_value(data):
