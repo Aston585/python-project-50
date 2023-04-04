@@ -1,17 +1,6 @@
 #from itertools import chain
 #from gendiff.formaters.normalize import normalize_value
 
-data = [(' ', 'common', [
-                         ('+', 'follow', False),
-                         (' ', 'setting1', 'Value 1'),
-                         ('-', 'setting2', 200),
-                         ('-', 'setting3', True),
-                         ('+', 'setting3', 'null'),
-                         ('+', 'setting5', [
-                                (' ', 'key5', 'value5')]),
-                         ('+', 'setting2', 600)]),
-                         ('+', 'setting4', 'blah blah')]
-
 data = [(' ', 'common', [('+', 'follow', False), (' ', 'setting1', 'Value 1'), ('-', 'setting2', 200), ('-', 'setting3', True),
                          ('+', 'setting3', 'null'), ('+', 'setting4', 'blah blah'), ('+', 'setting5', [(' ', 'key5', 'value5')]),
                          (' ', 'setting6', [(' ', 'doge', [('-', 'wow', ''), ('+', 'wow', 'so much')]), (' ', 'key', 'value'),
@@ -36,8 +25,7 @@ def get_path(data, key):
     return path
 
 
-print(get_path(data, key))
-
+#print(get_path(data, key))
 
 
 def chek_complex(data):
