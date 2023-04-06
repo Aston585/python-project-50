@@ -19,7 +19,7 @@ data = [(' ', 'common', [('+', 'follow', False), (' ', 'setting1', 'Value 1'), (
 
 # Однако, на данный момент вывод получается таким: ['common', 'setting6', 'doge', 'group1', 'baz'].
 #
-# ***Вопрос ***
+# ***Вопрос***
 # Как сделать чтобы, если искомое значение 'key' не было найдено на текущем уровне итерации, то при возврате на предыдущий
 # уровень значения 'пустых' уровней, записываемые в переменную path, удалялись?
 # В данном случае 'пустые' уровни это: 'common', 'setting6', 'doge'
@@ -63,7 +63,7 @@ def flatten(data):
             if value[0] in '+':
                 row.append(f"Property {get_path(data, value[2])} was added with value: {chek_complex(value[2])}")
             elif value[0] in '-':
-                row.append(f"Property 'path' was removed ('{value[1]}')")
+                row.append(f"Property {get_path(data, value[2])} was removed")
             # Где-то тут будет реализация последнего условия - 'was update...'
         return '\n'.join(row)
 
