@@ -28,28 +28,15 @@ def get_comparison_results(data1, data2):
     keys = data1.keys() | data2.keys()
     result = []
     for key in sorted(keys):
-        if key not in data2:
-            result.append(('-', key, get_children(data1[key])))
-        elif key in data1 and data2:
-            if not (isinstance(data1[key], dict)
-                    and isinstance(data2[key], dict)):
-                if data1[key] == data2[key]:
-                    result.append((' ', key,  get_children(data1[key])))
-                elif data1[key] != data2[key]:
-                    result.append(('-', key,  get_children(data1[key])))
-                    result.append(('+', key, get_children(data2[key])))
-            else:
-                result.append((' ', key,
-                               get_comparison_results(data1[key], data2[key])))
-        else:
-            result.append(('+', key, get_children(data2[key])))
-    return result
-
-
-def get_children(data):
-    if not isinstance(data, dict):
-        return data
-    result = []
-    for key, value in data.items():
-        result.append((' ', key, get_children(value)))
+        if (key in data1) and (key in data2):
+            if isinstance(data1[key], dict) and isinstance(data2[key], dict):
+                result.append({'status': 'unchanging', 'key': key, 'value': get_comparison_results(data1[key], data2[key])})
+            elif data1[key] == data2[key]:
+                result.append({'status': 'unchanging', 'key': key, 'value': data1[key]})
+            elif data1[key] != data2[key]:
+                result.append({'status': 'changing', 'key': key, 'from': data1[key], 'to': data2[key]})
+        elif (key in data1) and (key not in data2):
+            result.append({'status': 'removed', 'key': key, 'value': data1[key]})
+        elif (key in data2) and (key not in data1):
+            result.append({'status': 'added', 'key': key, 'value': data2[key]})
     return result
