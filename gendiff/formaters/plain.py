@@ -5,14 +5,17 @@ data = [{'status': 'unchanging', 'key': 'common', 'value': [{'status': 'added', 
 
 def flatten(data):
     row = []
+    path = []
 
     def inner(data):
         for item in data:
             if isinstance(item.get('value'), list):
+                path.append(item.get('key'))
                 inner(item.get('value'))
             changes = get_changes(item)
             if changes:
-                row.append(f"Property '{item.get('key')}' {changes}")
+                row.append(f"Property '{'.'.join([*path, item.get('key')])}' {changes}")
+        del path[-1:]
         return '\n'.join(row)
 
     return inner
