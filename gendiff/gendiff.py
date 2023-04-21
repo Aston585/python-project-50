@@ -1,6 +1,6 @@
 import json
 import yaml
-from gendiff.formaters.stylish import stylish
+from gendiff.formaters.stylish import stylish_view
 from gendiff.formaters.plain import flatten
 
 
@@ -25,7 +25,7 @@ def generate_diff(file_path1, file_path2, format_name=None):
     source1 = chek_and_open_file(file_path1)
     source2 = chek_and_open_file(file_path2)
     diff = get_comparison_results(source1, source2)
-    return flatten(diff) if format_name == 'plain' else stylish(diff)
+    return flatten(diff) if format_name == 'plain' else stylish_view(diff)
 
 
 def get_comparison_results(data1, data2):
