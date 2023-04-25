@@ -2,8 +2,7 @@ import json
 import yaml
 from gendiff.formaters.stylish import stylish_view
 from gendiff.formaters.plain import flatten
-
-
+from gendiff.formaters.json_ import json_viev
 
 
 def chek_and_open_file(file_path):
@@ -19,15 +18,15 @@ def chek_and_open_file(file_path):
         raise Exception("Invalid file format")
 
 
-#data1 = chek_and_open_file('./tests/fixtures/file1.json')
-#data2 = chek_and_open_file('./tests/fixtures/file2.json')
-
-
 def generate_diff(file_path1, file_path2, format_name=None):
     source1 = chek_and_open_file(file_path1)
     source2 = chek_and_open_file(file_path2)
     diff = get_comparison_results(source1, source2)
-    return flatten(diff)(diff) if format_name == 'plain' else stylish_view(diff)  # noqa
+    if format_name == 'plain':
+        return flatten(diff)(diff)
+    elif format_name == 'json':
+        return json_viev(diff)
+    return stylish_view(diff)
 
 
 def get_comparison_results(data1, data2):
@@ -67,5 +66,3 @@ def normalize_value(data):
         return data
     else:
         return str(data).lower()
-
-#print(get_comparison_results(data1, data2))
