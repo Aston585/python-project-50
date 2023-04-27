@@ -1,5 +1,6 @@
 import json
 import yaml
+from yaml.loader import BaseLoader
 from gendiff.formaters.stylish import stylish_view
 from gendiff.formaters.plain import flatten
 from gendiff.formaters.json_ import json_viev
@@ -8,7 +9,7 @@ from gendiff.formaters.json_ import json_viev
 def chek_and_open_file(file_path):
     if file_path.endswith('.yaml') or file_path.endswith('.yml'):
         with open(file_path) as f:
-            file_yaml = yaml.safe_load(f)
+            file_yaml = yaml.load(f, Loader=BaseLoader)
             return file_yaml
     elif file_path.endswith('.json'):
         with open(file_path) as f:

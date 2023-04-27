@@ -2,8 +2,8 @@ from gendiff.gendiff import generate_diff
 
 file1_json = './tests/fixtures/file1.json'
 file2_json = './tests/fixtures/file2.json'
-file1_yaml = './tests/fixtures/file1.yml'
-file2_yaml = './tests/fixtures/file2.yml'
+file1_yml = './tests/fixtures/file1.yml'
+file2_yaml = './tests/fixtures/file2.yaml'
 
 
 def open_correct_view_stylish():
@@ -21,7 +21,7 @@ def test_generate_diff_stylish_json():
 
 
 def test_generate_diff_stylish_yaml():
-    assert open_correct_view_stylish() == generate_diff(file1_yaml, file2_yaml)
+    assert open_correct_view_stylish() == generate_diff(file1_yml, file2_yaml)
 
 
 def test_generate_diff_plain_json():
