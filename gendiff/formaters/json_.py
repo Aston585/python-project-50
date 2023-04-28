@@ -2,4 +2,5 @@ import json
 
 
 def json_viev(data):
-    return json.dumps(data, indent=4)
+    result = [json.dumps(data, indent=4), '\n']
+    return ''.join(result)

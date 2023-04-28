@@ -16,17 +16,18 @@ def open_correct_view_plain():
         return plain.read()
 
 
-def test_generate_diff_stylish_json():
-    assert open_correct_view_stylish() == generate_diff(file1_json, file2_json)
+def open_correct_view_json():
+    with open('./tests/fixtures/right_json_format.txt') as json:
+        return json.read()
 
 
-def test_generate_diff_stylish_yaml():
-    assert open_correct_view_stylish() == generate_diff(file1_yml, file2_yaml)
+def test_generate_diff_stylish():
+    assert open_correct_view_stylish() == generate_diff(file1_json, file2_yaml)
 
 
-def test_generate_diff_plain_json():
-    assert open_correct_view_plain() == generate_diff(file1_json, file2_json, format_name='plain')
+def test_generate_diff_plain():
+    assert open_correct_view_plain() == generate_diff(file1_yml, file2_json, format_name='plain')
 
 
-#def test_generate_diff_plain_yaml():
-    #assert open_correct_view_plain() == generate_diff(file1_yaml, file2_yaml, format_name='plain')
+def test_generate_diff_json_format():
+    assert open_correct_view_json() == generate_diff(file1_yml, file2_yaml, format_name='json')
