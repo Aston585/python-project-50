@@ -1,17 +1,17 @@
 # Difference Calculator
 
-#### Hexlet tests and linter status:
+##### Hexlet tests and linter status
 [![Actions Status](https://github.com/Aston585/python-project-50/workflows/hexlet-check/badge.svg)](https://github.com/Aston585/python-project-50/actions)
 [![Linting and testing](https://github.com/Aston585/python-project-50/actions/workflows/gendiff.yml/badge.svg)](https://github.com/Aston585/python-project-50/actions/workflows/gendiff.yml)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/bcb0d83bd6f06428dc5d/test_coverage)](https://codeclimate.com/github/Aston585/python-project-50/test_coverage)
 
 A difference calculator is a program that determines the difference between two data structures.
 
-### Utility features:
+### Utility features
 - Support for different input formats: yaml, json
 - Report generation in the form of plain text, stylish and json
 
-### Utility demo:
+### Utility demo
 <a href="https://asciinema.org/a/q7LSKjNvu3YIcCtw0eFVOMOa6" target="_blank"><img src="https://asciinema.org/a/q7LSKjNvu3YIcCtw0eFVOMOa6.svg" /></a>
 
 ### Installation and launch
