@@ -11,9 +11,6 @@ A difference calculator is a program that determines the difference between two 
 - Support for different input formats: yaml, json
 - Report generation in the form of plain text, stylish and json
 
-### Utility demo
-<a href="https://asciinema.org/a/q7LSKjNvu3YIcCtw0eFVOMOa6" target="_blank"><img src="https://asciinema.org/a/q7LSKjNvu3YIcCtw0eFVOMOa6.svg" /></a>
-
 ### Installation and launch
 ```
 $ git clone https://github.com/Aston585/python-project-50.git
@@ -48,3 +45,5 @@ Setting "common.setting4" was added with value: False
 Setting "group1.baz" was updated. From 'bas' to 'bars'
 Section "group2" was removed
 ```
+### Utility demo
+<a href="https://asciinema.org/a/q7LSKjNvu3YIcCtw0eFVOMOa6" target="_blank"><img src="https://asciinema.org/a/q7LSKjNvu3YIcCtw0eFVOMOa6.svg" /></a>
