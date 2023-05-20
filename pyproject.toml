@@ -5,9 +5,16 @@ description = ""
 authors = ["Garkusha Valery <aston585v@gmail.com>"]
 readme = "README.md"
 packages = [{include = "gendiff"}]
+repository = "https://github.com/Aston585/python-project-50.git"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Environment :: Console",
+    "License :: Freeware",
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+pyyaml = "^6.0"
 
 [tool.poetry.scripts]
 gendiff = "gendiff.scripts.gendiff:main"
@@ -17,7 +24,6 @@ autopep8 = "^2.0.1"
 flake8 = "^6.0.0"
 pytest = "^7.2.1"
 pytest-cov = "^4.0.0"
-pyyaml = "^6.0"
 
 [build-system]
 requires = ["poetry-core"]

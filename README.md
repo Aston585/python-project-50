@@ -3,7 +3,9 @@
 ##### Hexlet tests and linter status
 [![Actions Status](https://github.com/Aston585/python-project-50/workflows/hexlet-check/badge.svg)](https://github.com/Aston585/python-project-50/actions)
 [![Linting and testing](https://github.com/Aston585/python-project-50/actions/workflows/gendiff.yml/badge.svg)](https://github.com/Aston585/python-project-50/actions/workflows/gendiff.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/bcb0d83bd6f06428dc5d/maintainability)](https://codeclimate.com/github/Aston585/python-project-50/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/bcb0d83bd6f06428dc5d/test_coverage)](https://codeclimate.com/github/Aston585/python-project-50/test_coverage)
+
 
 A difference calculator is a program that determines the difference between two data structures.
 

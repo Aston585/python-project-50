@@ -1,31 +1,16 @@
-import json
-import yaml
-from yaml.loader import BaseLoader
-from gendiff.formaters.stylish import stylish_view
-from gendiff.formaters.plain import flatten
-from gendiff.formaters.json_ import json_viev
+from .loading import loading_data
+from .formaters.stylish import stylish_view
+from .formaters.plain import flatten
+from .formaters.json_ import json_viev
 
 
-def chek_and_open_file(file_path):
-    if file_path.endswith('.yaml') or file_path.endswith('.yml'):
-        with open(file_path) as f:
-            file_yaml = yaml.load(f, Loader=BaseLoader)
-            return file_yaml
-    elif file_path.endswith('.json'):
-        with open(file_path) as f:
-            file_json = json.load(f)
-            return file_json
-    else:
-        raise Exception("Invalid file format")
-
-
-def generate_diff(file_path1, file_path2, format_name=None):
-    source1 = chek_and_open_file(file_path1)
-    source2 = chek_and_open_file(file_path2)
+def generate_diff(data1, data2, format='stylish'):
+    source1 = loading_data(data1)
+    source2 = loading_data(data2)
     diff = get_comparison_results(source1, source2)
-    if format_name == 'plain':
+    if format == 'plain':
         return flatten(diff)(diff)
-    elif format_name == 'json':
+    elif format == 'json':
         return json_viev(diff)
     return stylish_view(diff)
 
