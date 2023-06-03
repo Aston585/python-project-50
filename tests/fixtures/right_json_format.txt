@@ -1,6 +1,6 @@
 [
     {
-        "status": "unchanging",
+        "status": "unchanged",
         "key": "common",
         "value": [
             {
@@ -9,7 +9,7 @@
                 "value": "false"
             },
             {
-                "status": "unchanging",
+                "status": "unchanged",
                 "key": "setting1",
                 "value": "Value 1"
             },
@@ -19,7 +19,7 @@
                 "value": 200
             },
             {
-                "status": "changing",
+                "status": "changed",
                 "key": "setting3",
                 "from": "true",
                 "to": "null"
@@ -37,15 +37,15 @@
                 }
             },
             {
-                "status": "unchanging",
+                "status": "unchanged",
                 "key": "setting6",
                 "value": [
                     {
-                        "status": "unchanging",
+                        "status": "unchanged",
                         "key": "doge",
                         "value": [
                             {
-                                "status": "changing",
+                                "status": "changed",
                                 "key": "wow",
                                 "from": "",
                                 "to": "so much"
@@ -53,7 +53,7 @@
                         ]
                     },
                     {
-                        "status": "unchanging",
+                        "status": "unchanged",
                         "key": "key",
                         "value": "value"
                     },
@@ -67,22 +67,22 @@
         ]
     },
     {
-        "status": "unchanging",
+        "status": "unchanged",
         "key": "group1",
         "value": [
             {
-                "status": "changing",
+                "status": "changed",
                 "key": "baz",
                 "from": "bas",
                 "to": "bars"
             },
             {
-                "status": "unchanging",
+                "status": "unchanged",
                 "key": "foo",
                 "value": "bar"
             },
             {
-                "status": "changing",
+                "status": "changed",
                 "key": "nest",
                 "from": {
                     "key": "value"

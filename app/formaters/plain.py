@@ -23,10 +23,10 @@ def get_changes(data):
         return f"was added with value: {added_value}"
     elif data.get('status') == 'removed':
         return "was removed"
-    elif data.get('status') == 'changing':
-        changing_from = wrap_value(data.get('from'))
-        changing_to = wrap_value(data.get('to'))
-        return f"was updated. From {changing_from} to {changing_to}"
+    elif data.get('status') == 'changed':
+        changed_from = wrap_value(data.get('from'))
+        changed_to = wrap_value(data.get('to'))
+        return f"was updated. From {changed_from} to {changed_to}"
 
 
 def wrap_value(data):

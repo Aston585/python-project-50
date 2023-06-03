@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Garkusha Valery <aston585v@gmail.com>"]
 readme = "README.md"
-packages = [{include = "gendiff"}]
+packages = [{include = "app"}]
 repository = "https://github.com/Aston585/python-project-50.git"
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -17,7 +17,7 @@ python = "^3.10"
 pyyaml = "^6.0"
 
 [tool.poetry.scripts]
-gendiff = "gendiff.scripts.gendiff:main"
+gendiff = "app.scripts.app_starter:main"
 
 [tool.poetry.group.dev.dependencies]
 autopep8 = "^2.0.1"

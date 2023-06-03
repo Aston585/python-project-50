@@ -15,7 +15,7 @@ def preparation_of_values(data):
                     'value': preparation_of_values(item.get('value'))}
         if isinstance(item.get('value'), dict):
             item['value'] = get_nested_object(item.get('value'))
-        if item.get('status') == 'changing':
+        if item.get('status') == 'changed':
             item = [{'status': 'removed', 'key': item.get('key'),
                     'value': get_nested_object(item.get('from'))},
                     {'status': 'added', 'key': item.get('key'),
@@ -31,7 +31,7 @@ def get_nested_object(data):
         return data
     result = []
     for key, value in data.items():
-        result.append({'status': 'unchanging', 'key': key,
+        result.append({'status': 'unchanged', 'key': key,
                        'value': get_nested_object(value)})
     return result
 
@@ -53,5 +53,5 @@ def stylish(data, replacer=' ', level=0, spaces_count=4):
 
 
 def retrieving_status(status_key):
-    statuses = {'unchanging': ' ', 'added': '+', 'removed': '-'}
+    statuses = {'unchanged': ' ', 'added': '+', 'removed': '-'}
     return statuses.get(status_key)

@@ -1,7 +1,6 @@
-from gendiff.gendiff import generate_diff
-
-import pytest
+from app.gendiff import generate_diff
 from itertools import cycle, repeat
+import pytest
 
 first_version_files = (
     './tests/fixtures/file1.json',
