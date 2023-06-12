@@ -1,7 +1,7 @@
 import json
 import yaml
 # BaseLoader используется для предотвращения неоднозначности соответствия
-# значений, получаемым при десериализации: null -> None, '' -> None.
+# значений, получаемым при десериализации: null -> None, '' -> None .
 from yaml.loader import BaseLoader
 
 
