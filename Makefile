@@ -1,10 +1,10 @@
 install:
 	poetry install
 lint:
-	poetry run flake8 app
+	poetry run flake8 gendiff
 test:
 	poetry run pytest -vv
 test-coverage:
-	poetry run pytest --cov=app --cov-report xml
+	poetry run pytest --cov=gendiff --cov-report xml
 build:
 	poetry build

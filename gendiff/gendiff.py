@@ -1,8 +1,8 @@
-from app.loading import loading_data
-from app.comparer import get_comparison_results
-from app.formaters.stylish import stylish_view
-from app.formaters.plain import flatten
-from app.formaters.json_ import json_viev
+from gendiff.loading import loading_data
+from gendiff.comparer import get_comparison_results
+from gendiff.formaters.stylish import stylish_view
+from gendiff.formaters.plain import flatten
+from gendiff.formaters.json_ import json_viev
 
 
 def generate_diff(data1, data2, format='stylish'):
