@@ -12,7 +12,7 @@ def flatten(data):
                 row.append(f"Property '{'.'.join([*path, item.get('key')])}' {changes}")  # noqa
         del path[-1:]
         output = '\n'.join(row)
-        return output + '\n'
+        return output
 
     return inner
 
