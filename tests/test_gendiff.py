@@ -1,4 +1,4 @@
-from gendiff.gendiff import generate_diff
+from gendiff.app import generate_diff
 from itertools import cycle, repeat
 import pytest
 
