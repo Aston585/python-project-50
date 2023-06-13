@@ -3,7 +3,7 @@ from itertools import chain
 
 def stylish_view(data):
     source = preparation_of_values(data)
-    result = [stylish(source), '\n']
+    result = [stylish(source)]
     return ''.join(result)
 
 
