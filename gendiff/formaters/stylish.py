@@ -47,7 +47,7 @@ def stylish(data, replacer=' ', level=0, spaces_count=4):
         output_state = status if status else replacer
         output_key = item.get('key')
         output_value = stylish(item.get('value'), level=level)
-        row.append(f"{level_indent}  {output_state} {output_key}:{replacer if output_value else ''}{output_value}")  # noqa
+        row.append(f"{level_indent}  {output_state} {output_key}:{replacer}{output_value}")  # noqa
     output_data = list(chain('{', row, [level_indent + '}']))
     return '\n'.join(output_data)
 
