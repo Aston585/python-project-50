@@ -22,6 +22,8 @@ def number_to_int(data):
         if isinstance(value, dict):
             number_to_int(value)
         else:
-            if value.isdigit():
+            if value == '0':
+                data[key] = 0
+            elif value.isdigit():
                 data[key] = int(value)
     return data
