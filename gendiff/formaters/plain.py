@@ -34,4 +34,6 @@ def wrap_value(data):
         return '[complex value]'
     elif data not in ('false', 'true', 'null'):
         return f"'{data}'"
+    elif data == '0':
+        return int(data)
     return data
