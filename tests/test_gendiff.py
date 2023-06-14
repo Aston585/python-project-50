@@ -23,7 +23,6 @@ correct_output_plain_format = './tests/fixtures/right_plain_format.txt'
 correct_output_json_format = './tests/fixtures/right_json_format.txt'
 
 
-#formats_output = ('stylish', 'plain', 'json')
 stylish_format_output = 'stylish'
 plain_format_output = 'plain'
 json_format_output = 'json'
@@ -37,7 +36,7 @@ json_format_output = 'json'
             cycle(first_version_files),
             cycle(second_version_files),
             [
-                *repeat(correct_output_stylish_format,2),
+                *repeat(correct_output_stylish_format, 2),
                 *repeat(correct_output_plain_format, 2),
                 *repeat(correct_output_json_format, 2),
             ],
