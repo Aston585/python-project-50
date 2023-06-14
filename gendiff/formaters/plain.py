@@ -30,10 +30,10 @@ def get_changes(data):
 
 
 def wrap_value(data):
+    if data in ['0']:
+        return 0
     if isinstance(data, dict):
         return '[complex value]'
     elif data not in ('false', 'true', 'null'):
         return f"'{data}'"
-    elif data == '0':
-        return int(data)
     return data
