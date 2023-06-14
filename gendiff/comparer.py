@@ -33,6 +33,8 @@ def get_comparison_results(data1, data2):
 
 
 def normalize_value(data):
+    if data == '0':
+        return 0
     if data is None:
         return 'null'
     if data not in (False, True):
