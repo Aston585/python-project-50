@@ -1,41 +1,36 @@
-def get_comparison_results(data1, data2):
-    keys = data1.keys() | data2.keys()
-    result = []
+def get_comparison_results(file1, file2):
+    keys = file1.keys() | file2.keys()
+    diff = {}
     for key in sorted(keys):
-        if key not in data2:
-            result.append({'status': 'removed',
-                           'key': key,
-                           'value': normalize_value(data1[key])})
+        if key not in file2:
+            diff[key] = {'type': 'removed',
+                         'value': convert_value(file1[key])}
 
-        elif key not in data1:
-            result.append({'status': 'added',
-                           'key': key,
-                           'value': normalize_value(data2[key])})
+        elif key not in file1:
+            diff[key] = {'type': 'added',
+                         'value': convert_value(file2[key])}
 
-        elif isinstance(data1[key], dict) and isinstance(data2[key], dict):
-            result.append({'status': 'unchanged',
-                           'key': key,
-                           'value': normalize_value(get_comparison_results(
-                               data1[key], data2[key]))})
+        elif isinstance(file1[key], dict) and isinstance(file2[key], dict):
+            diff[key] = {'type': 'nested',
+                         'value': get_comparison_results(file1[key], file2[key])}  # noqa
 
-        elif data1[key] == data2[key]:
-            result.append({'status': 'unchanged',
-                           'key': key,
-                           'value': normalize_value(data1[key])})
+        elif file1[key] == file2[key]:
+            diff[key] = {'type': 'unchanged',
+                         'value': convert_value(file1[key])}
 
-        elif data1[key] != data2[key]:
-            result.append({'status': 'changed',
-                           'key': key,
-                           'from': normalize_value(data1[key]),
-                           'to': normalize_value(data2[key])})
-
-    return result
+        elif file1[key] != file2[key]:
+            diff[key] = {'type': 'changed',
+                         'from': convert_value(file1[key]),
+                         'to': convert_value(file2[key])}
+    return diff
 
 
-def normalize_value(data):
+def convert_value(data):
+    """
+    Конвертирование значений после десериализации из json-файла.
+    """
     if data is None:
         return 'null'
-    if data not in (False, True):
-        return data
-    else:
+    if isinstance(data, bool):
         return str(data).lower()
+    return data

@@ -1,99 +1,82 @@
-[
-    {
-        "status": "unchanged",
-        "key": "common",
-        "value": [
-            {
-                "status": "added",
-                "key": "follow",
+{
+    "common": {
+        "type": "nested",
+        "value": {
+            "follow": {
+                "type": "added",
                 "value": "false"
             },
-            {
-                "status": "unchanged",
-                "key": "setting1",
+            "setting1": {
+                "type": "unchanged",
                 "value": "Value 1"
             },
-            {
-                "status": "removed",
-                "key": "setting2",
+            "setting2": {
+                "type": "removed",
                 "value": 200
             },
-            {
-                "status": "changed",
-                "key": "setting3",
+            "setting3": {
+                "type": "changed",
                 "from": "true",
                 "to": "null"
             },
-            {
-                "status": "added",
-                "key": "setting4",
+            "setting4": {
+                "type": "added",
                 "value": "blah blah"
             },
-            {
-                "status": "added",
-                "key": "setting5",
+            "setting5": {
+                "type": "added",
                 "value": {
                     "key5": "value5"
                 }
             },
-            {
-                "status": "unchanged",
-                "key": "setting6",
-                "value": [
-                    {
-                        "status": "unchanged",
-                        "key": "doge",
-                        "value": [
-                            {
-                                "status": "changed",
-                                "key": "wow",
+            "setting6": {
+                "type": "nested",
+                "value": {
+                    "doge": {
+                        "type": "nested",
+                        "value": {
+                            "wow": {
+                                "type": "changed",
                                 "from": "",
                                 "to": "so much"
                             }
-                        ]
+                        }
                     },
-                    {
-                        "status": "unchanged",
-                        "key": "key",
+                    "key": {
+                        "type": "unchanged",
                         "value": "value"
                     },
-                    {
-                        "status": "added",
-                        "key": "ops",
+                    "ops": {
+                        "type": "added",
                         "value": "vops"
                     }
-                ]
+                }
             }
-        ]
+        }
     },
-    {
-        "status": "unchanged",
-        "key": "group1",
-        "value": [
-            {
-                "status": "changed",
-                "key": "baz",
+    "group1": {
+        "type": "nested",
+        "value": {
+            "baz": {
+                "type": "changed",
                 "from": "bas",
                 "to": "bars"
             },
-            {
-                "status": "unchanged",
-                "key": "foo",
+            "foo": {
+                "type": "unchanged",
                 "value": "bar"
             },
-            {
-                "status": "changed",
-                "key": "nest",
+            "nest": {
+                "type": "changed",
                 "from": {
                     "key": "value"
                 },
                 "to": "str"
             }
-        ]
+        }
     },
-    {
-        "status": "removed",
-        "key": "group2",
+    "group2": {
+        "type": "removed",
         "value": {
             "abc": 12345,
             "deep": {
@@ -101,9 +84,8 @@
             }
         }
     },
-    {
-        "status": "added",
-        "key": "group3",
+    "group3": {
+        "type": "added",
         "value": {
             "deep": {
                 "id": {
@@ -113,4 +95,4 @@
             "fee": 100500
         }
     }
-]
+}

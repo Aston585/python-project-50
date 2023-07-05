@@ -1,32 +1,28 @@
-def flatten(data):
-    row = []
-    path = []
+def flatten(diff, parent=None):
+    lines_to_output = []
 
-    def inner(data):
-        for item in data:
-            if isinstance(item.get('value'), list):
-                path.append(item.get('key'))
-                inner(item.get('value'))
-            changes = get_changes(item)
-            if changes:
-                row.append(f"Property '{'.'.join([*path, item.get('key')])}' {changes}")  # noqa
-        del path[-1:]
-        output = '\n'.join(row)
-        return output
+    for top_key, top_value in diff.items():
+        path = f"{parent + '.' if parent else ''}{top_key}"
 
-    return inner
+        if top_value.get('type') == 'nested':
+            lines_to_output.append(flatten(top_value.get('value'), parent=path))  # noqa
 
+        elif top_value.get('type') == 'added':
+            added_property = wrap_value(top_value.get('value'))
+            lines_to_output.append(
+                f"Property '{path}' was added with value: {added_property}")
 
-def get_changes(data):
-    if data.get('status') == 'added':
-        added_value = wrap_value(data.get('value'))
-        return f"was added with value: {added_value}"
-    elif data.get('status') == 'removed':
-        return "was removed"
-    elif data.get('status') == 'changed':
-        changed_from = wrap_value(data.get('from'))
-        changed_to = wrap_value(data.get('to'))
-        return f"was updated. From {changed_from} to {changed_to}"
+        elif top_value.get('type') == 'removed':
+            lines_to_output.append(f"Property '{path}' was removed")
+
+        elif top_value.get('type') == 'changed':
+            previous_property = wrap_value(top_value.get('from'))
+            new_property = wrap_value(top_value.get('to'))
+            lines_to_output.append(
+                f"Property '{path}' was updated."
+                f" From {previous_property} to {new_property}")
+
+    return '\n'.join(lines_to_output)
 
 
 def wrap_value(data):

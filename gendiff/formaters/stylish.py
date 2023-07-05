@@ -1,57 +1,45 @@
 from itertools import chain
 
 
-def stylish_view(data):
-    source = preparation_of_values(data)
-    result = [stylish(source)]
-    return ''.join(result)
-
-
-def preparation_of_values(data):
-    row = []
-    for item in data:
-        if isinstance(item.get('value'), list):
-            item = {'status': item.get('status'), 'key': item.get('key'),
-                    'value': preparation_of_values(item.get('value'))}
-        if isinstance(item.get('value'), dict):
-            item['value'] = get_nested_object(item.get('value'))
-        if item.get('status') == 'changed':
-            item = [{'status': 'removed', 'key': item.get('key'),
-                    'value': get_nested_object(item.get('from'))},
-                    {'status': 'added', 'key': item.get('key'),
-                    'value': get_nested_object(item.get('to'))}]
-            row.extend(item)
-            continue
-        row.append(item)
-    return row
-
-
-def get_nested_object(data):
-    if not isinstance(data, dict):
-        return data
-    result = []
-    for key, value in data.items():
-        result.append({'status': 'unchanged', 'key': key,
-                       'value': get_nested_object(value)})
-    return result
-
-
-def stylish(data, replacer=' ', level=0, spaces_count=4):
-    if not isinstance(data, list):
-        return data
-    level_indent = replacer * level * spaces_count
+def stylish_view(diff, level=0, spaces_count=4):
+    lines_to_output = []
+    level_indent = ' ' * level * spaces_count
     level += 1
-    row = []
-    for item in data:
-        status = retrieving_status(item.get('status'))
-        output_state = status if status else replacer
-        output_key = item.get('key')
-        output_value = stylish(item.get('value'), level=level)
-        row.append(f"{level_indent}  {output_state} {output_key}:{replacer}{output_value}")  # noqa
-    output_data = list(chain('{', row, [level_indent + '}']))
+    for top_key, top_value in diff.items():
+        type_ = top_value.get('type')
+        value = top_value.get('value')
+        old_value = top_value.get('from')
+        new_value = top_value.get('to')
+        if type_ == 'nested':
+            lines_to_output.append(
+                f"{level_indent}    {top_key}: {stylish_view(value, level)}")
+        elif type_ == 'added':
+            value = top_value.get('value')
+            lines_to_output.append(
+                f"{level_indent}  + {top_key}: {get_child(value, level)}")
+        elif type_ == 'removed':
+            lines_to_output.append(
+                f"{level_indent}  - {top_key}: {get_child(value, level)}")
+        elif type_ == 'changed':
+            lines_to_output.append(
+                f"{level_indent}  - {top_key}: {get_child(old_value, level)}")
+            lines_to_output.append(
+                f"{level_indent}  + {top_key}: {get_child(new_value, level)}")
+        elif type_ == 'unchanged':
+            lines_to_output.append(
+                f"{level_indent}    {top_key}: {get_child(value, level)}")
+        output_data = list(chain('{', lines_to_output, [level_indent + '}']))
     return '\n'.join(output_data)
 
 
-def retrieving_status(status_key):
-    statuses = {'unchanged': ' ', 'added': '+', 'removed': '-'}
-    return statuses.get(status_key)
+def get_child(data, level=0, spaces_count=4):
+    if not isinstance(data, dict):
+        return data
+    result = []
+    level_indent = ' ' * level * spaces_count
+    level += 1
+    for key, value in data.items():
+        result.append(
+            f"{level_indent}    {key}: {get_child(value, level)}"
+        )
+    return '{\n' + '\n'.join(result) + '\n' + level_indent + '}'
